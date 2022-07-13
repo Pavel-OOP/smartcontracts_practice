@@ -6,26 +6,31 @@ contract SimpleStorage {
 
     People public person;
     People[] public persons;
-    uint public peopleTupleLength = 2;
+    // uint public peopleTupleLength = 2;
 
     struct People {
         string name;
         uint age;
-        string separate;
     }
 
-    function personCreation(string memory _name, uint _age, string memory _separate) public returns(People memory) {
-        _separate = "||";
-        person = People(_name, _age, _separate);
+    function personCreation(string memory _name, uint _age) public returns(People memory) {
+        person = People(_name, _age);
         pushPersons(person);
         return person;
     }
 
-    function pushPersons(People memory _persons) public {
+    function pushPersons(People memory _persons) public virtual{
         persons.push(_persons);
     }
 
     function getAllPersons() public view returns (People[] memory){
         return persons;
     }
+
+    function getPerson(uint _index) public view returns (People memory){
+        return persons[_index];
+    }
+
+    
+    
 }
